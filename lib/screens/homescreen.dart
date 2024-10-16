@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:zoom_clone_101/screens/history_meeting.dart';
+import 'package:zoom_clone_101/screens/meeting_screen.dart';
 import 'package:zoom_clone_101/utils/colors.dart';
 import 'package:zoom_clone_101/widgets/home_meeting_button.dart';
 
@@ -16,6 +18,13 @@ class _HomescreenState extends State<Homescreen> {
       _currentIndex = index;
     });
   }
+  List pages =[
+    MeetingScreen(),
+    HistoryMeeting(),
+    const Text("state"),
+    const Text("person"),
+    
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -29,40 +38,7 @@ class _HomescreenState extends State<Homescreen> {
             )),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                HomeMeetingButton(
-                    onpressed: () {},
-                    icon: Icons.videocam,
-                    text: "New Meeting"),
-                HomeMeetingButton(
-                    onpressed: () {},
-                    icon: Icons.add_box_rounded,
-                    text: "Join "),
-                HomeMeetingButton(
-                    onpressed: () {},
-                    icon: Icons.calendar_today,
-                    text: "Schedule "),
-                HomeMeetingButton(
-                    onpressed: () {},
-                    icon: Icons.arrow_upward_rounded,
-                    text: "Share Screen"),
-              ],
-            ),
-          ),
-          const Expanded(
-              child: Center(
-                  child: Text(
-            'Create/Join Meeting with just a click',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-          ))), // Add this line
-        ],
-      ),
+      body: pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: footerColor,
         selectedItemColor: Colors.white,
@@ -93,3 +69,4 @@ class _HomescreenState extends State<Homescreen> {
     );
   }
 }
+
