@@ -5,6 +5,7 @@ import 'package:zoom_clone_101/firebase_options.dart';
 import 'package:zoom_clone_101/screens/homescreen.dart';
 import 'package:zoom_clone_101/screens/login_screen.dart';
 import 'package:zoom_clone_101/screens/meeting_screen.dart';
+import 'package:zoom_clone_101/screens/more_screen.dart';
 import 'package:zoom_clone_101/screens/video_call_screen.dart';
 import 'package:zoom_clone_101/utils/colors.dart';
 
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => const Homescreen(),
         '/meeting': (context) =>  MeetingScreen(),
         '/video-call': (context) => VideoCallScreen(),
+        '/more': (context) => const MoreScreen(),
 
       },
          home: StreamBuilder(

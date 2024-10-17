@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zoom_clone_101/authentication/auth_method.dart';
+import 'package:zoom_clone_101/resources/jits-_meet_method.dart';
 import 'package:zoom_clone_101/utils/colors.dart';
 import 'package:zoom_clone_101/widgets/meeting_option.dart';
 
@@ -14,6 +15,7 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
   final AuthMethods _authMethods = AuthMethods();
   late TextEditingController meetingIdController;
   late TextEditingController nameController;
+  final JitsiMeetMethod _jitsiMeetMethod = JitsiMeetMethod();
   bool isAudioMuted = true;
   bool isVideoMuted = true;
   @override
@@ -24,7 +26,20 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
     super.initState();
   }
 
-  _joinMeeting() {}
+  @override
+  void dispose() {
+    meetingIdController.dispose();
+    nameController.dispose();
+    super.dispose();
+  }
+
+  _joinMeeting() {
+    _jitsiMeetMethod.createMeeting(
+      roomName: meetingIdController.text,
+      username: nameController.text,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,12 +98,29 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
           ),
           const SizedBox(height: 20),
           MeetingOption(
-            text: "Don\'t join meeting",
+            text: "Mute Audio",
             isMute: isAudioMuted,
-            onChanged: (p0) {},
+            onChanged: onAudioMuted,
+          ),
+          MeetingOption(
+            text: "Mute Video",
+            isMute: isVideoMuted,
+            onChanged: onVideoMuted,
           )
         ],
       ),
     );
+  }
+
+  onAudioMuted(bool value) {
+    setState(() {
+      isAudioMuted = value;
+    });
+  }
+
+  onVideoMuted(bool value) {
+    setState(() {
+      isVideoMuted = value;
+    });
   }
 }

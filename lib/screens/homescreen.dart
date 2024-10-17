@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:zoom_clone_101/screens/history_meeting.dart';
 import 'package:zoom_clone_101/screens/meeting_screen.dart';
+import 'package:zoom_clone_101/screens/more_screen.dart';
 import 'package:zoom_clone_101/utils/colors.dart';
-import 'package:zoom_clone_101/widgets/home_meeting_button.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
@@ -11,34 +11,29 @@ class Homescreen extends StatefulWidget {
   State<Homescreen> createState() => _HomescreenState();
 }
 
-class _HomescreenState extends State<Homescreen> {
+class _HomescreenState extends State<Homescreen>
+    with AutomaticKeepAliveClientMixin {
   int _currentIndex = 0;
   onPageChanged(int index) {
     setState(() {
       _currentIndex = index;
     });
   }
-  List pages =[
+
+  List<Widget> pages = [
     MeetingScreen(),
     HistoryMeeting(),
+
     const Text("state"),
-    const Text("person"),
-    
+    MoreScreen()
+    // CustomButton(text: "Log Out", onPressed: ()=> AuthMethods().signOut)
   ];
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: backgroundColor,
-        elevation: 0,
-        title: const Text('Meet & Chat',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            )),
-        centerTitle: true,
-      ),
-      body: pages[_currentIndex],
+      body: pages[3],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: footerColor,
         selectedItemColor: Colors.white,
@@ -68,5 +63,7 @@ class _HomescreenState extends State<Homescreen> {
       ),
     );
   }
-}
 
+  @override
+  bool get wantKeepAlive => true;
+}
