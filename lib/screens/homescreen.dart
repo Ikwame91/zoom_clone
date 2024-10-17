@@ -33,7 +33,7 @@ class _HomescreenState extends State<Homescreen>
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      body: pages[3],
+      body: pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: footerColor,
         selectedItemColor: Colors.white,
@@ -44,8 +44,8 @@ class _HomescreenState extends State<Homescreen>
         unselectedFontSize: 14,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.comment_bank),
-            label: 'Meet & char',
+            icon: Icon(Icons.comment),
+            label: 'Meet & chat',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.lock_clock),

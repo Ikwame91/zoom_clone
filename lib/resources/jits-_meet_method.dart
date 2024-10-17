@@ -11,12 +11,10 @@ class JitsiMeetMethod {
     required String roomName,
     String username = '',
   }) async {
-    
     String name;
-    if(username.isEmpty){
-      name =_authmethods.currentUser.displayName!;
-    }
-    else{
+    if (username.isEmpty) {
+      name = _authmethods.currentUser.displayName!;
+    } else {
       name = username;
     }
 
@@ -26,9 +24,11 @@ class JitsiMeetMethod {
       configOverrides: {
         "startWithAudioMuted": true,
         "startWithVideoMuted": true,
-        "subject": "Zoom Clone Meeting",
+        "subject": roomName,
       },
-      featureFlags: {"unsaferoomwarning.enabled": false},
+      featureFlags: {
+        "unsaferoomwarning.enabled": false,
+      },
       userInfo: JitsiMeetUserInfo(
         displayName: name,
         email: _authmethods.currentUser.email,
@@ -38,12 +38,42 @@ class JitsiMeetMethod {
     firestoreMethods.addToMeetingHistory(roomName);
 
     JitsiMeet().join(
-        options,
-        JitsiMeetEventListener(
-          conferenceJoined: (url) => debugPrint("Joined conference: $url"),
-          conferenceTerminated: (url, error) =>
-              debugPrint("Conference ended: $url"),
-          conferenceWillJoin: (url) => debugPrint("Joining conference: $url"),
-        ));
+      options,
+      JitsiMeetEventListener(
+        conferenceJoined: (url) {
+          debugPrint("Joined conference: $url");
+         
+          _onMeetingStarted(); 
+        },
+        conferenceWillJoin: (url) {
+          debugPrint("Attempting to join conference: $url");
+  
+          _onMeetingWillJoin(); 
+        },
+        conferenceTerminated: (url, error) {
+          debugPrint("Conference ended: $url, Error: $error");
+         
+          _onMeetingEnded(); 
+        },
+      ),
+    );
+  }
+
+  void _onMeetingWillJoin() {
+    // Show some UI or message that indicates the user is waiting for the meeting to start
+    debugPrint("Waiting for the moderator to start the meeting...");
+    // Display a loading spinner or message
+  }
+
+  void _onMeetingStarted() {
+    // Hide the loading UI
+    debugPrint("Meeting has started");
+    // Proceed with the meeting
+  }
+
+  void _onMeetingEnded() {
+    // Clean up after meeting ends
+    debugPrint("Meeting has ended");
+    // Optionally, navigate back or show a message to the user
   }
 }

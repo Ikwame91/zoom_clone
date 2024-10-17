@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:zoom_clone_101/utils/colors.dart';
 
 class HomeMeetingButton extends StatelessWidget {
@@ -42,8 +43,10 @@ class HomeMeetingButton extends StatelessWidget {
           ),
           Text(
             text,
-            style: const TextStyle(
-                color: Colors.grey, fontWeight: FontWeight.bold),
+            style: GoogleFonts.poppins(
+              fontSize: 14,
+              fontWeight: FontWeight.w600
+            )
           )
         ],
       ),
