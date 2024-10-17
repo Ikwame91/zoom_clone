@@ -7,7 +7,8 @@ class HomeMeetingButton extends StatelessWidget {
       required this.onpressed,
       required this.icon,
       required this.text});
-  final VoidCallback onpressed;
+  final void Function() onpressed
+;
   final IconData icon;
   final String text;
 

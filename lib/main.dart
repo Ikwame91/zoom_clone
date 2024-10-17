@@ -4,6 +4,8 @@ import 'package:zoom_clone_101/authentication/auth_method.dart';
 import 'package:zoom_clone_101/firebase_options.dart';
 import 'package:zoom_clone_101/screens/homescreen.dart';
 import 'package:zoom_clone_101/screens/login_screen.dart';
+import 'package:zoom_clone_101/screens/meeting_screen.dart';
+import 'package:zoom_clone_101/screens/video_call_screen.dart';
 import 'package:zoom_clone_101/utils/colors.dart';
 
 void main() async {
@@ -39,6 +41,9 @@ class MyApp extends StatelessWidget {
       routes: {
         '/login': (context) => const LoginScreen(),
         '/home': (context) => const Homescreen(),
+        '/meeting': (context) =>  MeetingScreen(),
+        '/video-call': (context) => VideoCallScreen(),
+
       },
          home: StreamBuilder(
         stream: AuthMethods().authChanges,

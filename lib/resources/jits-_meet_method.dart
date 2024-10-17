@@ -4,12 +4,12 @@ import 'package:jitsi_meet_flutter_sdk/jitsi_meet_flutter_sdk.dart';
 import 'package:zoom_clone_101/authentication/auth_method.dart';
 
 class JitsiMeetMethod{
-  void createNewMeeting() async{
+  void createMeeting(String roomName) async{
     final AuthMethods _authmethods = AuthMethods();
   
     var options = JitsiMeetConferenceOptions(
     serverURL: "https://meet.jit.si",
-    room: "flutterZoomClone",
+    room: roomName,
     configOverrides: {
       "startWithAudioMuted": true,
       "startWithVideoMuted": true,
